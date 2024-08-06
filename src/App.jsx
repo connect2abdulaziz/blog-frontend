@@ -1,16 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import theme from './styles/theme';
-import GlobalStyles from './styles/GlobalStyles';
-import Home from './pages/Home';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import { AuthProvider } from './components/context/AuthContext';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./containers/pages/Home";
+import LoginPage from "./containers/pages/LoginPage";
+import SignupPage from "./containers/pages/SignupPage";
+import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
       <AuthProvider>
         <Router>
           <Routes>
@@ -21,7 +16,6 @@ const App = () => {
           </Routes>
         </Router>
       </AuthProvider>
-    </ThemeProvider>
   );
 };
 

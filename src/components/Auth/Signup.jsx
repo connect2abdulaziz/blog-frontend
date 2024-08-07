@@ -1,62 +1,32 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { signupSchema } from "../../utils/validation";
-import { useAuth } from "../../context/AuthContext";
-import { TextField, Button, Container, Box } from "@mui/material";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import TextField from '../common/InputField'; // adjust the path as needed
 
-const Signup = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(signupSchema),
+const schema = yup.object().shape({
+  username: yup.string().required('Username is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+  confirmPassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
+});
+
+const SignUpForm = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
   });
-  const { signup } = useAuth();
 
-  const onSubmit = async (data) => {
-    await signup(data);
+  const onSubmit = (data) => {
+    console.log('Form data submitted:', data);
   };
 
   return (
-    <Container>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-        sx={{ mt: 1 }}
-      >
-        <TextField
-          margin="normal"
-          fullWidth
-          label="Username"
-          {...register("username")}
-          error={!!errors.username}
-          helperText={errors.username?.message}
-        />
-        <TextField
-          margin="normal"
-          fullWidth
-          label="Email"
-          {...register("email")}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-        <TextField
-          margin="normal"
-          fullWidth
-          label="Password"
-          type="password"
-          {...register("password")}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <Button type="submit" fullWidth variant="contained" color="primary">
-          Signup
-        </Button>
-      </Box>
-    </Container>
+    <div>
+
+    </div>
   );
 };
 
-export default Signup;
+export default SignUpForm;

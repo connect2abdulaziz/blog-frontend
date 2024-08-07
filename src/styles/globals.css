@@ -13,3 +13,10 @@ body {
 .font-poppins {
   font-family: 'Poppins', sans-serif;
 }
+
+
+.post-card-container {
+  width: 915px;
+  height: 1840px;
+  gap: 48px;
+}

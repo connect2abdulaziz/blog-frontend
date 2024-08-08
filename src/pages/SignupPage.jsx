@@ -1,11 +1,11 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { signupSchema } from '../../utils/validation';
-import InputField from '../../components/common/InputField';
-import SubmitButton from '../../components/common/SubmitButton';
-import AuthTitle from '@/components/common/AuthTitle';
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { signupSchema } from "../utils/validation";
+import InputField from "../components/common/InputField";
+import SubmitButton from "../components/common/SubmitButton";
+import AuthTitle from "@/components/common/AuthTitle";
 
 const Signup = () => {
   const {
@@ -14,15 +14,15 @@ const Signup = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signupSchema),
-    mode: 'onTouched',
+    mode: "onTouched",
   });
 
   const onSubmit = async (data) => {
     try {
-      // Handle signup logic here
+      // TODO:
       console.log(data);
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error("Signup error:", error);
     }
   };
 

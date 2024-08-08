@@ -1,10 +1,11 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { loginSchema } from '../../utils/validation'; 
-import InputField from '../../components/common/InputField';
-import SubmitButton from '../../components/common/SubmitButton';
-import AuthTitle from '@/components/common/AuthTitle';
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../utils/validation";
+import InputField from "../components/common/InputField";
+import SubmitButton from "../components/common/SubmitButton";
+import AuthTitle from "@/components/common/AuthTitle";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -13,15 +14,15 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginSchema),
-    mode: 'onTouched',
+    mode: "onTouched",
   });
 
   const onSubmit = async (data) => {
     try {
-      // Handle login logic here
+      // TODO:
       console.log(data);
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
   };
 
@@ -37,7 +38,7 @@ const Login = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label="What's your email?"
+                label="Email"
                 type="email"
                 error={errors.email?.message}
               />
@@ -50,7 +51,7 @@ const Login = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label="Enter your password"
+                label="Password"
                 type="password"
                 error={errors.password?.message}
               />
@@ -58,6 +59,12 @@ const Login = () => {
           />
           <SubmitButton text="Log In" />
         </form>
+        <p className="text-center  w-full text-2xl text-gray-700  px-4 md:pt-14">
+          Don't have an account?
+        </p>
+        <Link to="/signup">
+          <SubmitButton fill={true} text="Sign Up" />
+        </Link>
       </div>
     </div>
   );

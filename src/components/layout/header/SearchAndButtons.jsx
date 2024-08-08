@@ -44,12 +44,12 @@ const SearchAndButtons = ({ isLoggedIn, user }) => {
       ) : (
         <>
           <Link to="/create-article">
-            <Button variant="outline">Create Article</Button>
+            <Button className="p-2 text-lg">Create Article</Button>
           </Link>
           <div className="flex items-center space-x-2">
             <span className="text-black">{user?.name}</span>
             <img
-              src={user?.profilePicture || "/path/to/default-avatar.png"}
+              src={user?.profilePicture || "../../../../public/user.png"}
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />

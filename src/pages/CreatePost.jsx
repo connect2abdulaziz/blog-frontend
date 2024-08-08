@@ -6,7 +6,7 @@ import Header from "../components/layout/header/Header";
 import Title from "../components/common/Title";
 import PostsPage from "../components/post/PostsPage";
 
-const Home = () => {
+const CreatePost = () => {
   const { isLoggedIn, user } = useAuth();
   const [posts, setPosts] = useState([]);
 
@@ -28,13 +28,12 @@ const Home = () => {
 
   return (
     <div>
-      <Header isLoggedIn={true} user={user} />
+      <Header isLoggedIn={isLoggedIn} user={user} />
       <main className="mt-24">
-        <Title  text= "" />
-        <PostsPage posts={posts} />
+        <Title isLoggedIn={isLoggedIn} />
       </main>
     </div>
   );
 };
 
-export default Home;
+export default CreatePost;

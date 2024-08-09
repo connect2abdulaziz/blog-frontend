@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '@/utils/validation';
 import { Input } from '@/components/ui/input';
-import { Button } from '../components/ui/button';
+import { Button } from '@/components/ui/button';
 import AuthTitle from '@/components/common/AuthTitle';
 import { Link, useNavigate } from 'react-router-dom';
 import { EyeIconToggle } from '@/components/ui/EyeIconToggle';
@@ -18,7 +18,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth(); 
   const navigate = useNavigate(); 
-
   const {
     register,
     handleSubmit,
@@ -27,7 +26,6 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
     mode: 'onTouched',
   });
-
   const onSubmit = async (data) => {
     setIsLoading(true);
     setLoginError('');
@@ -44,7 +42,6 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-[800px]">

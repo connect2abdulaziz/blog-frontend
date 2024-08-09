@@ -1,15 +1,14 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { signupSchema } from "../utils/validation";
-import InputField from "../components/common/InputField";
-import SubmitButton from "../components/common/SubmitButton";
+import { Input } from "@/components/ui/input";
+import { Button} from "../components/ui/button";
 import AuthTitle from "@/components/common/AuthTitle";
 
 const Signup = () => {
   const {
-    control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -19,7 +18,6 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     try {
-      // TODO:
       console.log(data);
     } catch (error) {
       console.error("Signup error:", error);
@@ -27,74 +25,44 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center  min-h-screen bg-gray-100">
-      <div className="w-full max-w-[800px] bg-white p-8 shadow-lg rounded-lg">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-[800px]">
         <AuthTitle isSignup={true} />
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <Controller
-            name="firstName"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label="What's your first name?"
-                error={errors.firstName?.message}
-              />
-            )}
+          <Input
+            {...register("firstName")}
+            placeholder="What's your first name?"
+            className={errors.firstName ? "border-black" : ""}
           />
-          <Controller
-            name="lastName"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label="What's your last name?"
-                error={errors.lastName?.message}
-              />
-            )}
+          {errors.firstName && (<p className="text-gray-600 text-xs">{errors.firstName.message}</p>)}
+          <Input
+            {...register("lastName")}
+            placeholder="What's your last name?"
+            className={errors.lastName ? "border-black" : ""}
           />
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label="What's your email?"
-                type="email"
-                error={errors.email?.message}
-              />
-            )}
+          {errors.lastName && (<p className="text-gray-600 text-xs">{errors.lastName.message}</p>)}
+          <Input
+            {...register("email")}
+            placeholder="What's your email?"
+            type="email"
+            className={errors.email ? "border-black" : ""}
           />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label="Create a password"
-                type="password"
-                error={errors.password?.message}
-              />
-            )}
+          {errors.email && (<p className="text-gray-600 text-xs">{errors.email.message}</p>)}
+          <Input
+            {...register("password")}
+            placeholder="Create a password"
+            type="password"
+            className={errors.password ? "border-black" : ""}
           />
-          <Controller
-            name="confirmPassword"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label="Confirm your password"
-                type="password"
-                error={errors.confirmPassword?.message}
-              />
-            )}
+          {errors.password && (<p className="text-gray-600 text-xs">{errors.password.message}</p>)}
+          <Input
+            {...register("confirmPassword")}
+            placeholder="Confirm your password"
+            type="password"
+            className={errors.confirmPassword ? "border-black" : ""}
           />
-          <SubmitButton text="Create An Account" />
+          {errors.confirmPassword && (<p className="text-gray-600 text-xs">{errors.confirmPassword.message}</p>)}
+          <Button text="" size= "full" >Create An Account </Button>
         </form>
       </div>
     </div>
